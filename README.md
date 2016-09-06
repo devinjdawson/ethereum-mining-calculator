@@ -1,5 +1,5 @@
 # Monero Mining Calculator
-View live version of [Monero Mining Calculator](https://badmofo.github.io/ethereum-mining-calculator/).
+View live version of [Monero Mining Calculator](https://devinjdawson.github.io/ethereum-mining-calculator/).
 
 ## Calculations
 
