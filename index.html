@@ -198,9 +198,9 @@
 
     function EtherMiningCtrl($scope, $http, $log) {
 
-      $scope.ethPrice = ethereumStats.priceUsd;
-      $scope.netHashGH = (ethereumStats.difficulty / ethereumStats.blockTime) / 1e9;
-      $scope.blockTime = ethereumStats.blockTime;
+      $scope.ethPrice = moneroStats.priceUsd;
+      $scope.netHashGH = (moneroStats.difficulty / moneroStats.blockTime) / 1e9;
+      $scope.blockTime = moneroStats.blockTime;
       $scope.earnings = {};
 
       $scope.computeProfits = function() {
