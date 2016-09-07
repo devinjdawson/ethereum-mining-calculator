@@ -1,11 +1,11 @@
-<html ng-app="ether">
-  <title>Ethereum Mining Profitability Calculator</title>
+<html ng-app="monero">
+  <title>Monero Mining Profitability Calculator</title>
   
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-  <meta name="title" content="Ethereum Mining Profitability Calculator">
-  <meta name="keywords" content="ethereum mining calculator, ethereum profitability calculator, ethereum mining calc, eth mining calculator, ethereum calculator">
-  <meta name="description" content="The best and more accurate ethereum mining calculator">
+  <meta name="title" content="Monero Mining Profitability Calculator">
+  <meta name="keywords" content="monero mining calculator, Monero profitability calculator, monero mining calc, xmr mining calculator, ethereum calculator">
+  <meta name="description" content="The best and more accurate Monero mining calculator">
 
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
@@ -16,10 +16,10 @@
   </style>
 </head>
 
-<body ng-controller="EtherMiningCtrl" ng-cloak>
+<body ng-controller="MoneroMiningCtrl" ng-cloak>
   <div class="container">
     <div class="row text-center">
-      <h1>Ethereum Mining Profitability Calculator</h1>
+      <h1>Monero Mining Profitability Calculator</h1>
     </div>
   </div>
 
@@ -68,7 +68,7 @@
                 type="text" 
                 class="form-control" 
                 ng-model="userHash" 
-                placeholder="Your hashrate in MH/s"
+                placeholder="Your hashrate in GH/s"
                 ng-change="computeProfits()"/>
             </div>
           </div>
@@ -95,29 +95,29 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="col-lg-5 control-label">1 ETH price</label>
+            <label class="col-lg-5 control-label">1 XMR price</label>
             <div class="col-lg-7">
               <input 
                 type="text" 
                 class="form-control" 
-                ng-model="ethPrice" 
+                ng-model="xmrPrice" 
                 placeholder="Network Hashrate"
                 ng-change="computeProfits()"/>
             </div>
           </div>
         </form>
         <p class="text-muted">
-          *Calculate how much Ether (ETH) <b>should</b> be mined with a specific hashrate.
+          *Calculate how much Monero (XMR) <b>should</b> be mined with a specific hashrate.
         </p>
       </div>
       <div class="col-lg-6">
-        <h2>Earnings (ETH)</h2>
+        <h2>Earnings (XMR)</h2>
 
         <table class="table table-striped">
           <thead>
             <tr>
               <th class="col-lg-4">Period</th>
-              <th class="col-lg-4 text-center">ETH</th>
+              <th class="col-lg-4 text-center">XMR</th>
               <th class="col-lg-4 text-center">USD</th>
             </tr>
           </thead>
@@ -125,32 +125,32 @@
             <tr>
               <td>Minute</td>
               <td ng-bind="earnings.min | number:6"></td>
-              <td ng-bind="earnings.min*ethPrice | currency"></td>
+              <td ng-bind="earnings.min*xmrPrice | currency"></td>
             </tr>
             <tr>
               <td>Hour</td>
               <td ng-bind="earnings.hour | number:6"></td>
-              <td ng-bind="earnings.hour*ethPrice | currency"></td>
+              <td ng-bind="earnings.hour*xmrPrice | currency"></td>
             </tr>
             <tr>
               <td>Day</td>
               <td ng-bind="earnings.day | number:6"></td>
-              <td ng-bind="earnings.day*ethPrice | currency"></td>
+              <td ng-bind="earnings.day*xmrPrice | currency"></td>
             </tr>
             <tr>
               <td>Week</td>
               <td ng-bind="earnings.week | number:6"></td>
-              <td ng-bind="earnings.week*ethPrice | currency"></td>
+              <td ng-bind="earnings.week*xmrPrice | currency"></td>
             </tr>
             <tr>
               <td>Month</td>
               <td ng-bind="earnings.month | number:6"></td>
-              <td ng-bind="earnings.month*ethPrice | currency"></td>
+              <td ng-bind="earnings.month*xmrPrice | currency"></td>
             </tr>
             <tr>
               <td>Year</td>
               <td ng-bind="earnings.year | number:6"></td>
-              <td ng-bind="earnings.year*ethPrice | currency"></td>
+              <td ng-bind="earnings.year*xmrPrice | currency"></td>
             </tr>
           </tbody>
         </table>
@@ -192,13 +192,13 @@
   <script src="//alpha61.com/ethereum.json"></script>
   <script>
 
-    angular.module('ether', ['ngResource']).config(['$controllerProvider', function($controllerProvider) {
+    angular.module('monero', ['ngResource']).config(['$controllerProvider', function($controllerProvider) {
       $controllerProvider.allowGlobals();
     }]);
 
-    function EtherMiningCtrl($scope, $http, $log) {
+    function MoneroMiningCtrl($scope, $http, $log) {
 
-      $scope.ethPrice = moneroStats.priceUsd;
+      $scope.xmrPrice = moneroStats.priceUsd;
       $scope.netHashGH = (moneroStats.difficulty / moneroStats.blockTime) / 1e9;
       $scope.blockTime = moneroStats.blockTime;
       $scope.earnings = {};
@@ -206,8 +206,8 @@
       $scope.computeProfits = function() {
         var userRatio = $scope.userHash * 1e6 / ($scope.netHashGH * 1e9);
         var blocksPerMin = 60.0 / $scope.blockTime;
-        var ethPerMin = blocksPerMin * 5.0;
-        $scope.earnings.min = userRatio * ethPerMin;
+        var xmrPerMin = blocksPerMin * 5.0;
+        $scope.earnings.min = userRatio * xmrPerMin;
         $scope.earnings.hour = $scope.earnings.min * 60;
         $scope.earnings.day = $scope.earnings.hour * 24;
         $scope.earnings.week = $scope.earnings.day * 7;
